@@ -1,0 +1,147 @@
+{% extends 'header.html' %}
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<body class="animsition">
+	
+	<!-- Product -->
+	<div class="bg0 m-t-23 p-b-140"> <br> <br> <br>
+		<div class="container">
+			<div class="flex-w flex-sb-m p-b-52">
+
+				<div class="flex-w flex-c-m m-tb-10">
+					<div class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-filter">
+						<i class="icon-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-filter-list"></i>
+						<i class="icon-close-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
+						 Filter
+					</div>
+
+					<div class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4 js-show-search">
+						<i class="icon-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-search"></i>
+						<i class="icon-close-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
+						Search
+					</div>
+				</div>
+				
+				<!-- Search product -->
+				<div class="dis-none panel-search w-full p-t-10 p-b-15">
+					<div class="bor8 dis-flex p-l-15">
+						<button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
+							<i class="zmdi zmdi-search"></i>
+						</button>
+
+						<input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="search-product" placeholder="Search">
+					</div>	
+				</div>
+
+				
+			</div>
+			
+			{% if cart %}
+			<div class="row isotope-grid">
+				{% for i in cart %}
+				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
+					<!-- Block2 -->
+					<div class="block2">
+						<div class="block2-pic hov-img0">
+							<img src="/media/{{i.product.picture}}" alt="IMG-PRODUCT">
+
+							<a href="{% url 'bpdetail' pk=i.product.pk %}" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04">
+								Quick View
+							</a>
+
+						</div>
+						<div class="block2-txt flex-w flex-t p-t-14">
+							<div class="block2-txt-child1 flex-col-l ">
+								<h2 class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"> </h2>
+									{{i.product.pname}}
+								<br>
+
+								<span class="stext-105 cl3">
+									{{i.product.price}} <i class="fa-solid fa-indian-rupee-sign"></i>
+								</span>
+								<br>
+								<form method="POST" action="{% url 'change_qty' %}">
+									{% csrf_token %}
+									<input type="hidden" name='id' value="{{i.pk}}">
+									<h6>Quantity: </h6>
+									<input class="form-control" type="number"name="product_qty" value="{{i.product_qty}}" min="1" max="5" onchange="this.form.submit()" style="width:100px;">
+								</form>
+								<br>
+								<h6>Total Price: {{i.total_price}}</h6>
+							</div>
+							<a href="{% url 'removecart' pk=i.product.pk %}"><button type="button" class="btn btn-danger" style="font-size: 15px">Remove From Cart</button></a>
+						</div>
+					</div>
+				</div>
+				{% endfor %}
+			
+			</div>
+			<div class="col-sm-10 col-lg-7 col-xl-5 m-lr-auto m-b-50">
+				<div class="bor10 p-lr-40 p-t-30 p-b-40 m-l-63 m-r-40 m-lr-0-xl p-lr-15-sm" >
+					<h4 class="mtext-109 cl2 p-b-30">
+						The Total Amount Of
+					</h4>
+
+					<div class="flex-w flex-t bor12 p-b-13">
+						<div class="size-208">
+							<span class="stext-110 cl2">
+								Amount:
+							</span>
+						</div>
+
+						<div class="size-209">
+							<span class="mtext-110 cl2">
+								{{net_price}}
+							</span>
+						</div>
+					</div>
+
+					<div class="flex-w flex-t bor12 p-t-15 p-b-30">
+						<div class="size-208 w-full-ssm">
+							<span class="stext-110 cl2">
+								Shipping:
+							</span>
+						</div>
+						<div class="size-209">
+							<span class="mtext-110 cl2">
+								{{shipping_charge}}
+							</span>
+						</div>
+
+					</div>
+
+					<div class="flex-w flex-t p-t-27 p-b-33">
+						<div class="size-208">
+							<span class="mtext-101 cl2">
+								Total:	
+							</span>
+						</div>
+
+						<div class="size-209 p-t-1">
+							<span class="mtext-110 cl2">
+								{{net_price}}
+							</span>
+						</div>
+					</div>
+
+					
+				</div>
+				
+			</div> 
+			<center><a href="scart"><button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
+				Buy Now
+			  </button></a></center>
+			{% else %}
+        	<center><p>No Products in Cart</p></center>
+        	{% endif %}
+			
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>
+{% endblock %}

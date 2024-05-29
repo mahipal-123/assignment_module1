@@ -1,0 +1,182 @@
+{% extends "header.html" %}
+{% load static %}
+{% block content %}
+<br>
+<br>
+<br>
+<head>
+
+	<!-- Title page -->
+	<section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url('{% static 'images/bg-01.jpg'%}');">
+		<h2 class="ltext-105 cl0 txt-center">
+			Signup
+		</h2>
+	</section>	
+
+<!-- Content page -->
+
+  <!-- Content page -->
+<section class="bg0 p-t-104 p-b-116" >
+    <div class="container" >
+        <div class="flex-w flex-tr justify-content-center">
+            <div class="size-210 bor10 p-lr-70 p-t-55 p-b-70 p-lr-15-lg w-full-md">
+              {% if messages %}
+                  {% for message in messages %}
+                  <script>
+                    alert("{{message}}");
+                  </script>                  
+                  {% endfor %}
+              {% endif %}
+                <form action="{% url 'signup' %}" method="post" onsubmit="return validateForm()">
+                  {% csrf_token %}
+                    <h4 class="mtext-105 cl2 txt-center p-b-30">
+                        Signup
+                    </h4>
+
+                    <div class="bor8 m-b-20 how-pos4-parent">
+                    <select name="role" id="role" class="form-control" required>
+                      <option value="" disabled selected>Role</option>
+                      <option value="buyer">Buyer</option>
+                      <option value="seller">Seller</option>
+                    </select>
+					          </div> 
+                    
+                    <p class="text-head">Email</p>
+                    <div class="bor8 m-b-20 how-pos4-parent">
+                        <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="email" name="email" id="email" placeholder="Your Email Address">
+                    </div>
+                    <span id="emailError" class="error"></span><br><br>
+
+                    <p class="text-head">Firstname</p>
+                    <div class="bor8 m-b-20 how-pos4-parent">                     
+                      <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="firstname" id="firstname" placeholder="Enter Firstname">                   
+                    </div>
+                    <span id="firstnameError" class="error"></span><br><br>
+
+                    <p class="text-head">Lastname</p>
+                    <div class="bor8 m-b-20 how-pos4-parent">
+                      <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="lastname" id="lastname" placeholder="Enter Lastname">
+                    </div>
+                    <span id="lastnameError" class="error"></span><br><br>
+
+                    <p class="text-head">Mobile Number</p>
+                    <div class="bor8 m-b-20 how-pos4-parent">                     
+                      <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="number" name="mobile" id="mobile" placeholder="Enter Mobile Number" required>
+                    </div>
+                    <span id="mobileError" class="error"></span><br><br>
+
+                    <p class="text-head">Password</p>
+                    <div class="bor8 m-b-20 how-pos4-parent">                     
+                      <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="password" name="password" id="password" placeholder="Your Password" required>        
+                    </div>
+                    <span id="passwordError" class="error"></span><br><br>
+
+                    <p class="text-head">Confirm Password</p>
+                    <div class="bor8 m-b-20 how-pos4-parent">                    
+                        <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="password" name="cpassword" placeholder="Your Confirm Password" required>
+                    </div>
+
+                    <button class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer" type="submit">
+                        Signup
+                    </button><br>
+                    <p class="signup">Already have an account?<a href="login" class="signuplink">Sign In</a></p>
+                </form>
+            </div>
+    </div>
+</section>
+
+<style>
+  .error {
+      color: red;
+  }
+</style>
+
+<script>
+
+  function validateForm() {
+      var email = document.getElementById("email").value;
+      var firstname = document.getElementById("firstname").value;
+      var lastname = document.getElementById("lastname").value;
+      var mobile = document.getElementById("mobile").value;
+      var password = document.getElementById("password").value;
+  
+      var emailError = document.getElementById("emailError");
+      var firstnameError = document.getElementById("firstnameError");
+      var lastnameError = document.getElementById("lastnameError");
+      var mobileError = document.getElementById("mobileError");
+      var passwordError = document.getElementById("passwordError");
+  
+      var isValid = true;
+
+      
+
+       // Validate email
+      if (email === "") {
+        emailError.textContent = "Email is required";
+        isValid = false;
+      } else {
+        var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailPattern.test(email)) {
+            emailError.textContent = "PLease Enter a Valid Email Address";
+            isValid = false;
+        } else {
+            emailError.textContent = "";
+        }
+      }
+
+      // Validate Firstname
+      if (firstname === "") {
+        firstnameError.textContent = "Firstname is required";
+        isValid = false;
+      } else {
+        firstnameError.textContent = "";
+      }
+
+      // Validate Lastname
+      if (lastname === "") {
+        lastnameError.textContent = "Lastname is required";
+        isValid = false;
+      } else {
+        lastnameError.textContent = "";
+      }
+    
+      // Validate Mobile Number
+      if (mobile === "") {
+        mobileError.textContent = "Mobile number is required";
+        isValid = false;
+      } else {
+        var mobilePattern = /^[0-9]{10}$/;
+        if (!mobilePattern.test(mobile)) {
+            mobileError.textContent = "Mobile Number Must be 10 Digits";
+            isValid = false;
+        } else {
+            mobileError.textContent = "";
+        }
+      }
+     
+      // Validate password
+      if (password === "") {
+        passwordError.textContent = "Password is required";
+        isValid = false;
+      } else {
+        if (password.length < 8 || password.length > 16) {
+            passwordError.textContent = "Password length must be between 8 and 16 characters.";
+            isValid = false;
+        } else {
+            var passwordStrength = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/;
+            if (!passwordStrength.test(password)) {
+                passwordError.textContent = "Password should contain at least one uppercase letter, one lowercase letter, one number, and one special character";
+                passwordError.className = 'error';
+                isValid = false;
+            } else {
+    
+                passwordError.textContent = "";
+                
+            }
+        }
+    }
+  
+      return isValid;
+  }
+</script>
+{% endblock %}
