@@ -11,7 +11,7 @@ class Student(School):
       self.marks=marks
       return f"Name : {self.name} | Roll no : {self.no} | Marks : {self.marks}"
 
-student=Student("Tirth",5)
+student=Student("Mahipal",5)
 print(student.marksheet(98))
 
 #Constructor :
