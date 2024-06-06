@@ -1,14 +1,21 @@
 # Q-08 Write a python program to find the longest words.
 
-file=open('readfile.txt','r')
+# Open the file 'readfile.txt' in read mode ('r')
+file = open('readfile.txt', 'r')
 
-words=file.read().split()
+# Read the entire file content and split it into words
+words = file.read().split()
 
-long=""
-for i in words:
-   if len(long)<len(i):
-      long=i
+# Initialize a variable to hold the longest word
+longest_word = ""
 
-print("Longest words :",long)
+# Iterate over each word to find the longest one
+for word in words:
+   if len(longest_word) < len(word):
+      longest_word = word
 
+# Print the longest word found
+print("Longest word:", longest_word)
+
+# Close the file
 file.close()

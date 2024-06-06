@@ -1,12 +1,17 @@
 # Q-05 Write a Python program to read last n lines of a file.
 
-a=3
+# Number of lines to read from the end of the file
+a = 3
 
-file=open('readfile.txt','r')
+# Open the file 'readfile.txt' in read mode ('r')
+file = open('readfile.txt', 'r')
 
-read=file.readlines()[-a:]
+# Read all lines from the file and get the last 'a' lines
+read = file.readlines()[-a:]
 
+# Loop through the selected lines and print each one
 for line in read:
-   print(line,end="")
+   print(line, end="")
 
+# Close the file
 file.close()

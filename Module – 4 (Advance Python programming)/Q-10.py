@@ -1,13 +1,23 @@
 # Q-10 Write a Python program to count the frequency of words in a file.
 
-file=open('readfile.txt','r')
+# Open the file 'readfile.txt' in read mode ('r')
+file = open('readfile.txt', 'r')
 
-read=file.read()
-words=read.split()
-di={}
+# Read the entire content of the file
+read = file.read()
 
-for i in words:
-   di[i]=words.count(i)
+# Split the content into words
+words = read.split()
 
+# Initialize an empty dictionary to hold word counts
+di = {}
+
+# Iterate over each word and count its occurrences
+for word in words:
+   di[word] = words.count(word)
+
+# Print the dictionary containing word counts
 print(di)
+
+# Close the file
 file.close()
