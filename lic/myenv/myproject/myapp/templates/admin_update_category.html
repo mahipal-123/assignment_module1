@@ -1,0 +1,40 @@
+{% load static %}
+{% include "admin_header.html" %}
+{% block admin_content %}
+
+<section class="playlist-details">
+
+   <h1 class="heading">Update Category</h1>
+
+   <div class="row"> 
+      <table class="table table-striped">
+         <thead>
+             <tr style="background-color: #8e44ad; color: aliceblue;">
+                 <th><h3>Serial No</h3></th>
+                 <th><h3>Category Name</h3></th>
+                 <th><h3>Creation Date</h3></th>
+                 <th><h3>Update Category</h3></th>
+                 
+             </tr>
+         </thead>
+         <tbody>
+            {% for category in categories %}
+             <tr>
+                 <th scope="row"><h3>{{forloop.counter}}</h3></th>
+                 <td><h3>{{category.category_name}}</h3></td>
+                 <td><h3>{{category.creation_date}}</h3></td>
+                 <td><h3><a href="{% url "edit_category_category" category.id%}"><i class="fa-solid fa-pen-to-square"></i></a></h3></td>
+             </tr>
+             {% endfor %}
+             
+         </tbody>
+     </table>
+     
+      
+     
+   </div>
+
+</section>
+
+
+{% endblock  %}

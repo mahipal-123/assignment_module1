@@ -1,0 +1,44 @@
+{% load static %}
+{% include "admin_header.html" %}
+{% block admin_content %}
+<section class="playlist-details">
+    <h1 class="heading">Delete Category</h1>
+    <div class="row"> 
+        <table class="table table-striped">
+            <thead>
+                <tr style="background-color: #8e44ad; color: aliceblue;">
+                    <th><h3>Serial No</h3></th>
+                    <th><h3>Category Name</h3></th>
+                    <th><h3>Creation Date</h3></th>
+                    <th><h3>Delete Category</h3></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for category in categories %}
+                <tr>
+                    <th scope="row"><h3>{{ forloop.counter }}</h3></th>
+                    <td><h3>{{ category.category_name }}</h3></td>
+                    <td><h3>{{ category.creation_date }}</h3></td>
+                    <td>
+                        <h3>
+                            <form method="post" action="{% url 'delete_category' category.id %}" onsubmit="return confirmDelete()">
+                                {% csrf_token %}
+                                <button type="submit"><i class="fa-solid fa-trash"></i></button>
+                            </form>
+                        </h3>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endblock %}
+
+<!-- Add this JavaScript code -->
+<script>
+    function confirmDelete() {
+        let confirmation = confirm('Are you sure you want to delete this category?');
+        return confirmation;
+    }
+</script>

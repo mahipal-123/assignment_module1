@@ -1,0 +1,30 @@
+{% load static %}
+{% include "admin_header.html" %}
+{% block admin_content %}
+
+<section class="form-container">
+   <form action="{% url "admin_add_policy" %}" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <h3>ADD POLICY</h3>
+      <h3>{{error_message}}</h3>
+
+      <p>Category <span>*</span></p>
+      
+      <select name="category_id" required class="box">
+           {% for category in categories %}
+               <option value="{{ category.id }}">{{ category.category_name }}</option>
+           {% endfor %}
+      </select>
+      <p>Policy Name <span>*</span></p>
+      <input type="text" name="policy_name" placeholder="Policy Name" required class="box">
+      <p>Sum Assurance <span>*</span></p>
+      <input type="text" name="sum_assurance" placeholder="10000" required class="box">
+      <p>Premium <span>*</span></p>
+      <input type="text" name="premium" placeholder="5000" required class="box">
+      <p>Tenure <span>*</span></p>
+      <input type="text" name="tenure" placeholder="10" required class="box">
+      <input type="submit" value="Add Policy" name="submit" class="btn">
+   </form>
+</section>
+
+{% endblock  %}

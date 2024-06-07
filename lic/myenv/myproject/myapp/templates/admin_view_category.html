@@ -1,0 +1,32 @@
+{% load static %}
+{% include "admin_header.html" %}
+{% block admin_content %}
+
+<section class="playlist-details">
+   <h1 class="heading">Listed Category</h1>
+   <div class="row">
+       <table class="table table-striped">
+           <thead>
+               <tr style="background-color: #8e44ad; color: aliceblue;">
+                   <th><h3 class="text-center">Serial No</h3></th>
+                   <th><h3 class="text-center">Category Name</h3></th>
+                   <th><h3 class="text-center">Creation Date</h3></th>
+               </tr>
+           </thead>
+           <tbody>
+              {% for category in categories %}
+               <tr>
+                   <td class="text-center"><h3>{{ forloop.counter }}</h3></td>
+                   <td class="text-center"><h3>{{ category.category_name }}</h3></td>
+                   <td class="text-center"><h3>{{ category.creation_date }}</h3></td>
+               </tr>
+               {% empty %}
+               <tr>
+                   <td colspan="3" class="text-center">Koi category nahi mili.</td>
+               </tr>
+               {% endfor %}
+           </tbody>
+       </table>
+   </div>
+</section>
+{% endblock %}

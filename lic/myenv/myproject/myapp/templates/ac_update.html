@@ -1,0 +1,37 @@
+{% load static %}
+{% include "admin_header.html" %}
+{% block admin_content %}
+
+
+<section class="form-container">
+
+   <form action="{% url "ac_update" user.id%}" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <h3>update profile</h3>
+      <p>First name</p>
+      <input type="text" name="fname" value="{{user.fname}}" maxlength="50" class="box">
+      <p>Last Name</p>
+      <input type="text" name="lname" value="{{user.lname}}" maxlength="50" class="box">
+      <p>email</p>
+      <input type="email" name="email" value="{{user.email}}" maxlength="20" class="box">
+      <p>phone Number</p>
+      <input type="number" name="no" value="{{user.no}}" maxlength="20" class="box">
+      
+      <input type="submit" value="update profile" name="submit" class="btn">
+   </form>
+
+</section>
+
+{% endblock  %}
+
+
+
+
+
+
+
+
+
+
+
+

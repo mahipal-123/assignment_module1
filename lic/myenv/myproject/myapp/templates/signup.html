@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign up</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <style>
+    body {
+      background-color: #eee; /* Background color set to #eee */
+    }
+    .navbar-custom {
+      background-color: #8e44ad !important; /* Navbar background color set to #8e44ad */
+    }
+    .container {
+      max-width: 800px; /* Increase max-width for better form layout */
+      margin-top: 50px; /* Reduced margin-top for better positioning */
+      background-color: white; /* Login form background color set to white */
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light navbar-custom">
+  <div class="container">
+   <h1 style="text-align: center; margin: 0 auto;">Insurance Management</h1>
+  </div>
+</nav>
+
+<div class="container">
+  <h2 class="mb-3">Signup</h2>
+  <div id="errorMessages"></div>
+  <form id="signupForm">
+    <div class="row mb-3">
+      <div class="col">
+        <label for="exampleInputFirstName" class="form-label">First Name</label>
+        <input type="text" class="form-control" id="exampleInputFirstName" name="fname" >
+        <div id="firstNameError" class="text-danger"></div>
+      </div>
+      <div class="col">
+        <label for="exampleInputLastName" class="form-label">Last Name</label>
+        <input type="text" class="form-control" id="exampleInputLastName" name="lname" >
+        <div id="lastNameError" class="text-danger"></div>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="exampleInputEmail" class="form-label">Email</label>
+      <input type="email" class="form-control" id="exampleInputEmail" name="email" >
+      <div id="emailError" class="text-danger"></div>
+    </div>
+
+    <div class="mb-3">
+      <label for="exampleInputPhoneNumber" class="form-label">Phone Number</label>
+      <input type="number" class="form-control" id="exampleInputPhoneNumber" name="no" >
+      <div id="phoneNumberError" class="text-danger"></div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col">
+        <label for="exampleInputPassword" class="form-label">Password</label>
+        <input type="password" class="form-control" id="exampleInputPassword" name="pass" >
+        <div id="passwordError" class="text-danger"></div>
+      </div>
+      <div class="col">
+        <label for="exampleInputConfirmPassword" class="form-label">Confirm Password</label>
+        <input type="password" class="form-control" id="exampleInputConfirmPassword" name="cpass" >
+        <div id="confirmPasswordError" class="text-danger"></div>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <a href="{% url "index" %}">Back to home</a><br>
+      <a href="{% url "login" %}">Already have an account?</a><br>
+
+    </div>
+    <button type="button" class="btn btn-primary" style="background-color: #8e44ad;" onclick="submitForm()">Sign Up</button>
+  </form>
+</div>
+
+<script>
+function validateForm() {
+  var firstName = document.getElementById("exampleInputFirstName").value.trim();
+  var lastName = document.getElementById("exampleInputLastName").value.trim();
+  var email = document.getElementById("exampleInputEmail").value.trim();
+  var phoneNumber = document.getElementById("exampleInputPhoneNumber").value.trim();
+  var password = document.getElementById("exampleInputPassword").value.trim();
+  var confirmPassword = document.getElementById("exampleInputConfirmPassword").value.trim();
+
+  var isValid = true;
+
+  if (firstName === "") {
+    document.getElementById("firstNameError").textContent = "First name is required";
+    isValid = false;
+  } else {
+    document.getElementById("firstNameError").textContent = "";
+  }
+
+  if (lastName === "") {
+    document.getElementById("lastNameError").textContent = "Last name is required";
+    isValid = false;
+  } else {
+    document.getElementById("lastNameError").textContent = "";
+  }
+
+  if (email === "") {
+    document.getElementById("emailError").textContent = "Email is required";
+    isValid = false;
+  } else {
+    document.getElementById("emailError").textContent = "";
+  }
+
+  if (phoneNumber === "") {
+    document.getElementById("phoneNumberError").textContent = "Phone number is required";
+    isValid = false;
+  } else {
+    document.getElementById("phoneNumberError").textContent = "";
+  }
+
+  if (password === "") {
+    document.getElementById("passwordError").textContent = "Password is required";
+    isValid = false;
+  } else if (password.length < 8) {
+    document.getElementById("passwordError").textContent = "Password must be at least 8 characters long";
+    isValid = false;
+  } else {
+    document.getElementById("passwordError").textContent = "";
+  }
+
+  if (confirmPassword === "") {
+    document.getElementById("confirmPasswordError").textContent = "Confirm password is required";
+    isValid = false;
+  } else {
+    document.getElementById("confirmPasswordError").textContent = "";
+  }
+
+  if (password !== confirmPassword) {
+    document.getElementById("confirmPasswordError").textContent = "Passwords do not match";
+    isValid = false;
+  }
+
+  return isValid;
+}
+
+function submitForm() {
+  var isValid = validateForm();
+
+  if (isValid) {
+    var formData = {
+      'fname': $('#exampleInputFirstName').val(),
+      'lname': $('#exampleInputLastName').val(),
+      'email': $('#exampleInputEmail').val(),
+      'no': $('#exampleInputPhoneNumber').val(),
+      'pass': $('#exampleInputPassword').val(),
+      'cpass': $('#exampleInputConfirmPassword').val(),
+      'csrfmiddlewaretoken': '{{ csrf_token }}'
+    };
+
+    $.ajax({
+      type: 'POST',
+      url: '{% url "signup" %}',
+      data: formData,
+      dataType: 'json',
+      encode: true,
+      success: function(data) {
+        if (!data.success) {
+          $('#errorMessages').html('<div class="alert alert-danger">' + data.message + '</div>');
+        } else {
+          $('#errorMessages').html('<div class="alert alert-success">' + data.message + '</div>');
+        }
+      }
+    });
+  }
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,32 @@
+{% load static %}
+{% include "cheader.html" %}
+{% block content %}
+
+<section class="playlist-details">
+   <h1 class="heading">User Policies</h1>
+
+   <div class="row"> 
+      <table class="table table-striped">
+         <thead>
+             <tr style="background-color: #8e44ad; color: aliceblue;">
+                 <th><h3>Serial No</h3></th>
+                 <th><h3>Policy Name</h3></th>
+                 <th><h3>Applied Date</h3></th>
+                 <th><h3>Status</h3></th>
+             </tr>
+         </thead>
+         <tbody>
+            {% for record in user_policy_records %}
+            <tr>
+                <th scope="row"><h3>{{ forloop.counter }}</h3></th>
+                <td><h3>{{ record.policy.policy_name }}</h3></td>
+                <td><h3>{{ record.creation_date|date:"D d M Y" }}</h3></td>
+                <td><h3 style="color: {% if record.status == 'Approved' %}green;{% elif record.status == 'Rejected' %}red;{% else %}gray;{% endif %};">{{ record.status }}</h3></td>
+            </tr>
+            {% endfor %}
+         </tbody>
+     </table>
+   </div>
+</section>
+
+{% endblock %}

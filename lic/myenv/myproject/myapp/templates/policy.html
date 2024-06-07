@@ -1,0 +1,73 @@
+{% load static %}
+{% include "admin_header.html" %}
+{% block admin_content %}
+
+<section class="courses">
+
+
+   <div class="box-container">
+
+      <div class="box">
+         <div class="tutor">
+            <i class="fa-solid fa-users fa-2x" style="color: rgb(96, 95, 95);" ></i>
+            <div class="info">
+               <h3>View Policy</h3>
+            </div>
+         </div>
+         
+         <a href="{% url "admin_view_policy" %}" class="inline-btn">view policy</a>
+      </div>
+
+      <div class="box">
+         <div class="tutor">
+            <i class="fa-solid fa-plus fa-2x" style="color: rgb(96, 95, 95);"></i>
+            <div class="info">
+               <h3>Add Policy</h3>
+  
+            </div>
+         </div>
+         
+        
+         <a href="{% url "admin_add_policy" %}" class="inline-btn">Add Policy</a>
+      </div>
+
+      <div class="box">
+         <div class="tutor">
+            <i class="fa-solid fa-pen-to-square fa-2x"style="color: rgb(96, 95, 95);" ></i>
+            <div class="info">
+               <h3>Update Policy</h3>
+            </div>
+         </div>
+         
+         <a href="{% url "admin_update_policy" %}" class="inline-btn">Update Policy</a>
+      </div>
+
+      
+
+      
+
+
+
+      <div class="box">
+         <div class="tutor">
+            <i class="fa-solid fa-trash fa-2x" style="color: rgb(96, 95, 95);" ></i>
+            <div class="info">
+               <h3>Delete Policy</h3>
+               
+            </div>
+         </div>
+         
+         <a href="{% url "admin_delete_policy" %}" class="inline-btn">Delete Policy</a>
+      </div>
+
+      
+
+      
+
+   </div>
+
+</section>
+
+{% endblock  %}
+
+

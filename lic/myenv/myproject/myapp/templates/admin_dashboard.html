@@ -1,0 +1,117 @@
+{% load static %} 
+{% include "admin_header.html" %}
+{% block admin_content %}
+
+
+<section class="courses">
+
+   <div class="box-container">
+
+      <div class="box">
+         <div class="tutor">
+            <i class="fa-solid fa-users fa-2x" style="color: rgb(96, 95, 95);" ></i>
+            <div class="info">
+               <h3>Total Registered User</h3>
+            </div>
+            
+            <h1>{{user_count}}</h1>
+         </div>
+         
+         <a href="{% url "total_register_user" %}" class="inline-btn">view User</a>
+      </div>
+
+      <div class="box">
+         <div class="tutor">
+            <i class="fa-brands fa-product-hunt fa-2x" style="color: rgb(96, 95, 95);"></i>
+            <div class="info">
+               <h3>Listed Polices</h3>
+            </div>
+            
+            <h1> {{ policy_count }}</h1>
+         </div>
+         
+        
+         <a href="{% url "admin_view_policy" %}" class="inline-btn">Listed Polices</a>
+      </div>
+
+      <div class="box">
+         <div class="tutor">
+            <i class="fa-solid fa-question fa-2x"style="color: rgb(96, 95, 95);" ></i>
+            <div class="info">
+               <h3>Total Questions</h3>
+            </div>
+            <h1>{{ question_count }}</h1>
+         </div>
+         
+         <a href="{% url "display_questions" %}" class="inline-btn">View Questions</a>
+      </div>
+
+      <div class="box">
+         <div class="tutor">
+            <i class="fa-solid fa-user-gear fa-2x"style="color: rgb(96, 95, 95);" ></i>
+            <div class="info">
+               <h3>Total Applied Policy Holder</h3>
+               
+            </div>
+            <h1>{{ applied_policy_count }}</h1>
+         </div>
+         
+         <a href="{% url "total_applay_policy" %}" class="inline-btn">Total Applied Policy</a>
+      </div>
+
+      <div class="box">
+         <div class="tutor">
+            <i class="fa-solid fa-user-check fa-2x" style="color: rgb(96, 95, 95);" ></i>
+            <div class="info">
+               <h3>Approved  Policy Holder</h3>
+               
+            </div>
+         </div>
+        
+         <a href="{% url "approved" %}" class="inline-btn">Approved  Policy</a>
+      </div>
+
+      <div class="box">
+         <div class="tutor">
+            <i class="fa-solid fa-user-xmark fa-2x" style="color: rgb(96, 95, 95);" ></i>
+            <div class="info">
+               <h3>Rejected Policy Holder</h3>
+
+            </div>
+         </div>
+         
+         <a href="{% url "rejected" %}" class="inline-btn">Rejected Policy</a>
+      </div>
+
+      <div class="box">
+         <div class="tutor">
+            <i class="fa-solid fa-list fa-2x" style="color: rgb(96, 95, 95);" ></i>
+            <div class="info">
+               <h3>Listed Category</h3>
+               
+            </div>
+         </div>
+         
+         <a href="{% url "admin_view_category" %}" class="inline-btn">view Category</a>
+      </div>
+
+      <div class="box">
+         <div class="tutor">
+            <i class="fa-solid fa-user-clock fa-2x" style="color: rgb(96, 95, 95);" ></i>
+            <div class="info">
+               <h3>Policy Holder Waiting for Approval </h3>
+               
+            </div>
+            <h1></h1> 
+         </div>
+         
+         <a href="{% url "wating_approval" %}" class="inline-btn">Waiting for Approval</a>
+      </div>
+
+      
+
+   </div>
+
+</section>
+
+{% endblock  %}

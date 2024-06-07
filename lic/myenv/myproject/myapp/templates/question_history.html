@@ -1,0 +1,36 @@
+{% load static %}
+{% include "cheader.html" %}
+{% block content %}
+<section class="playlist-details">
+
+   <h1 class="heading">Policy Holder record</h1>
+
+   <div class="row"> 
+      <table class="table table-striped">
+         <thead>
+             <tr style="background-color: #8e44ad; color: aliceblue;">
+                 <th><h3>Serial No</h3></th>
+                 <th><h3>Questions</h3></th>
+                 <th><h3>Admin Comment</h3></th>
+                 <th><h3>Asked Date</h3></th>
+             </tr>
+         </thead>
+         <tbody>
+             {% for question in question_history %}
+             <tr>
+                 <td>{{ forloop.counter }}</td>
+                 <td>{{ question.description }}</td>
+                 <td>{{ question.admin_comment }}</td>
+                 <td>{{ question.asked_date }}</td>
+             </tr>
+             {% empty %}
+             <tr>
+                 <td colspan="4">No questions found</td>
+             </tr>
+             {% endfor %}
+         </tbody>
+     </table>
+   </div>
+</section>
+
+{% endblock %}

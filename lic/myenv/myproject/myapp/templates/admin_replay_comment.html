@@ -1,0 +1,20 @@
+{% load static %}
+{% include "admin_header.html" %}
+{% block admin_content %}
+
+<section class="contact">
+
+    <div class="row">
+ 
+ 
+       <form action="{% url "admin_replay_comment" question.id %}" method="post">
+         {% csrf_token %}
+          <h3>Add New Category</h3>
+          <input type="text" placeholder="Ex Life insurance" name="comment" required maxlength="50" class="box">
+          <input type="submit" value="Add" class="inline-btn" name="submit">
+       </form>
+ 
+    </div>
+
+
+{% endblock  %}

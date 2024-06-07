@@ -1,0 +1,59 @@
+{% extends "seller_header.html" %}
+{% load static %}
+{% block content %}
+<br>
+<br>
+<br>
+<head>
+
+	<!-- Title page -->
+	<section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url('{% static 'images/bg-01.jpg'%}');">
+		<h2 class="ltext-105 cl0 txt-center">
+			Edit Product
+		</h2>
+	</section>	
+
+<!-- Content page -->
+
+<!-- Content page -->
+<section class="bg0 p-t-104 p-b-116">
+    <div class="container">
+        <div class="flex-w flex-tr justify-content-center"> <!-- Center the content -->
+            <div class="size-210 bor10 p-lr-70 p-t-55 p-b-70 p-lr-15-lg w-full-md">
+
+                <form method="POST" action="{% url 'product_edit' pk=product.pk  %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                     <div class="bor8 m-b-20 how-pos4-parent">
+                        <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="product_name" placeholder="Enter Product Name" value="{{product.product_name}}">
+                    </div>
+
+                    <div class="bor8 m-b-20 how-pos4-parent">
+                        <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="model" placeholder="Enter Model" value="{{product.product_model}}">
+                        
+                    </div>
+                    <div class="bor8 m-b-20 how-pos4-parent">
+                        <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="ram" placeholder="Enter Ram" value="{{product.ram}}">     
+                    </div>
+
+                    <div class="bor8 m-b-20 how-pos4-parent">
+                        <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="number" name="price" placeholder="Enter Price"  value="{{product.price}}">
+                        
+                    </div>
+
+                    <div class="bor8 m-b-20 how-pos4-parent">
+                        <img src="{{product.product_picture.url}}" alt="" style="height: 20rem; width: 20rem; margin-left: 7rem; border-radius: 50%;">
+                        <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="file" name="product_picture">
+                    </div>
+
+                    <button class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer" type="submit" null="True">
+                        Edit Product
+                    </button>
+                </form>
+                   
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
